@@ -9,11 +9,16 @@
 .Header nav {
     display: flex;
     justify-content: center;
+    margin-bottom: 2rem;
 }
 
 .Header nav a {
     padding: 0 1rem;
     border-right: 1px solid #fff;
+}
+
+.Header nav a.active {
+    color: orange;
 }
 
 .Header nav a:last-child {
