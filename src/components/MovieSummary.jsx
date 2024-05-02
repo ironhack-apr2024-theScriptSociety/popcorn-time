@@ -7,7 +7,6 @@ function Movie(props) {
             }
 
             <p>Title: {props.movieDetails.title}</p>
-            <p>Rating: {props.movieDetails.rating}</p>
 
             {props.movieDetails.rating > 8 && <p>RECOMMENDED</p>}
 

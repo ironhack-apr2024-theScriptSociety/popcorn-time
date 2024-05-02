@@ -1,6 +1,6 @@
 import { useState } from "react";
 import movies from "../data/movies.json";
-import Movie from "./Movie";
+import MovieSummary from "./MovieSummary";
 
 
 function MovieList(){
@@ -29,7 +29,7 @@ function MovieList(){
 
             {moviesToDisplay.map( (movieObj) => {
                 return (
-                    <Movie 
+                    <MovieSummary 
                         key={movieObj.id} 
                         movieDetails={movieObj} 
                         callbackToDelete={deleteMovie}
