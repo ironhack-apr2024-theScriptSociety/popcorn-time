@@ -1,5 +1,6 @@
 import { useState } from "react";
 import movies from "../data/movies.json";
+import Movie from "./Movie";
 
 
 function MovieList(){
@@ -13,19 +14,26 @@ function MovieList(){
     }
 
 
+    let title;
+    if(moviesToDisplay.length > 0){
+        title = <h1>Number of movies: {moviesToDisplay.length}</h1>;
+    } else {
+        title = <h1>Sorry, no movies to display</h1>
+    }
+
+
     return (
         <section className="MovieList">
 
-            <h1>Number of movies: {moviesToDisplay.length}</h1>
+            {title}
 
             {moviesToDisplay.map( (movieObj) => {
                 return (
-                    <div className="card" key={movieObj.id}>
-                        <p>Title: {movieObj.title}</p>
-                        <p>Rating: {movieObj.rating}</p>
-
-                        <button onClick={() => {deleteMovie(movieObj.id)}}>Delete</button>
-                    </div>
+                    <Movie 
+                        key={movieObj.id} 
+                        movieDetails={movieObj} 
+                        callbackToDelete={deleteMovie}
+                    />
                 )
             })}
         </section>
