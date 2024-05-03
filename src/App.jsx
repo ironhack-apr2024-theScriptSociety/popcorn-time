@@ -15,6 +15,7 @@ function App() {
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
 
   const [title, setTitle] = useState("");
+  const [rating, setRating] = useState("");
 
 
   const deleteMovie = (movieId) => {
@@ -28,7 +29,7 @@ function App() {
     
     const newMovie = {
       title: title,
-      year: 2001
+      rating: rating
     }
 
     // moviesToDisplay.push(newMovie); // NEVER, NEVER, modify state directly !!
@@ -39,10 +40,11 @@ function App() {
 
     // Clear form
     setTitle("");
+    setRating("");
 
   }
 
-  
+
   return (
     <>
     
@@ -55,11 +57,25 @@ function App() {
 
           <label>Title:
             <input 
-              type="text" 
               name='title' 
-              placeholder='enter the title' 
+              type="text" 
+              required
+              placeholder='Harry Potter' 
               value={title} 
               onChange={(e) => { setTitle(e.target.value) }}
+            />
+          </label>
+
+          <label>Rating:
+            <input
+              name='rating'
+              type="number"
+              required
+              min={1}
+              max={10}
+              placeholder='10'
+              value={rating}
+              onChange={(e) => { setRating(e.target.value) }}
             />
           </label>
 
