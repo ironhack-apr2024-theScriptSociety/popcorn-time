@@ -1,5 +1,5 @@
 function Footer(){
-    return <h1>This is the component Footer</h1>
+    return <h5>The Script Society</h5>
 }
 
 export default Footer;
