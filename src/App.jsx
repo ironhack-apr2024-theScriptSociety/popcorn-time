@@ -9,13 +9,28 @@ import ErrorPage from './components/ErrorPage';
 import MovieDetails from './components/MovieDetails';
 
 import movies from "./data/movies.json";
+import AddMovie from './components/AddMovie';
 
 function App() {
 
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
 
-  const [title, setTitle] = useState("");
-  const [rating, setRating] = useState("");
+
+  const createMovie = (newMovie) => {
+
+    const movieIds = moviesToDisplay.map(movie => movie.id);
+    const maxId = Math.max(...movieIds); 
+    const nextId = maxId + 1;
+
+    const newMovieWithId = {
+      ...newMovie,
+      id: nextId
+    }
+
+    const newList = [newMovieWithId, ...moviesToDisplay];
+
+    setMoviesToDisplay(newList);
+  }
 
 
   const deleteMovie = (movieId) => {
@@ -24,70 +39,12 @@ function App() {
   }
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    const movieIds = moviesToDisplay.map( movie => movie.id);
-    const maxId = Math.max(...movieIds);
-    const nextId = maxId + 1;
-
-    const newMovie = {
-      id: nextId,
-      title: title,
-      rating: rating
-    }
-
-    // moviesToDisplay.push(newMovie); // NEVER, NEVER, modify state directly !!
-
-    const newList = [newMovie, ...moviesToDisplay];
-
-    setMoviesToDisplay(newList);
-
-    // Clear form
-    setTitle("");
-    setRating("");
-
-  }
-
-
   return (
     <>
     
       <Header numberOfMovies={moviesToDisplay.length} />
 
-      <section>
-        <h2>Create your own movie</h2>
-
-        <form onSubmit={handleSubmit} >
-
-          <label>Title:
-            <input 
-              name='title' 
-              type="text" 
-              required
-              placeholder='Harry Potter' 
-              value={title} 
-              onChange={(e) => { setTitle(e.target.value) }}
-            />
-          </label>
-
-          <label>Rating:
-            <input
-              name='rating'
-              type="number"
-              required
-              min={1}
-              max={10}
-              placeholder='10'
-              value={rating}
-              onChange={(e) => { setRating(e.target.value) }}
-            />
-          </label>
-
-          <p><button>Create</button></p>
-        </form>
-
-      </section>
+      <AddMovie callbackToCreate={createMovie} />
 
       <Routes>
         <Route path="/" element={<MovieList moviesToDisplay={moviesToDisplay} callbackToDelete={deleteMovie} />} />
