@@ -1,12 +1,10 @@
 import { Link, useParams } from 'react-router-dom';
 
-import moviesArr from "../data/movies.json";
-
-function MovieDetails(){
+function MovieDetails(props){
 
     const {movieId} = useParams();
 
-    const movie = moviesArr.find( (movieObj) => movieObj.id === parseInt(movieId));
+    const movie = props.moviesToDisplay.find( (movieObj) => movieObj.id === parseInt(movieId));
 
     return (
         <div className='MovieDetails'>
@@ -22,7 +20,7 @@ function MovieDetails(){
             <p>Rating: {movie.rating}</p>
             
             <div>
-                { movie.genres && movie.genres.map( genre => <span className='badge'>{genre}</span> )}
+                { movie.genres && movie.genres.map( (genre, index) => <span key={index} className='badge'>{genre}</span> )}
             </div>
 
             <p>

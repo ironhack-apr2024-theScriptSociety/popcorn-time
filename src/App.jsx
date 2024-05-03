@@ -93,7 +93,7 @@ function App() {
         <Route path="/" element={<MovieList moviesToDisplay={moviesToDisplay} callbackToDelete={deleteMovie} />} />
         <Route path="/about" element={<p>this is the about page</p>} />
         <Route path="/contact" element={<p>this is the contact page</p>} />
-        <Route path="/movies/:movieId" element={<MovieDetails />} />
+        <Route path="/movies/:movieId" element={<MovieDetails moviesToDisplay={moviesToDisplay} />} />
 
         <Route path='*' element={<ErrorPage />} />
       </Routes>
